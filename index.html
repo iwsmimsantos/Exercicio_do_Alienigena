@@ -45,6 +45,8 @@
         var fogo;
         var plataforma;
         var moeda;
+        var pontuacao = 0;
+        var placar;
 
         // Carregar imagens
         function preload() {
@@ -65,7 +67,6 @@
 
             // Criar alienígena
             alien = this.physics.add.sprite(larguraJogo/2, 0, 'player');
-
             // Impedir que personagem atravesse barreira da imagem
             alien.setCollideWorldBounds(true); 
 
@@ -79,9 +80,30 @@
 
             // Adicionar moeda
             moeda = this.physics.add.sprite(larguraJogo/2, 0, 'moeda');
+            // Impedir que moeda atravesse barreira da imagem
             moeda.setCollideWorldBounds(true);
+            // Movimento de "quicar" da moeda
             moeda.setBounce(0.7);
+            // Adicionar colisão
             this.physics.add.collider(moeda, plataforma);
+
+            // Adicionando placar 
+            placar = this.add.text(50, 50, 'Moedas:' + pontuacao, {fontSize:'45px', fill:'#495613'}); 
+
+            // Quando o alien encostar na moeda
+            this.physics.add.overlap(alien, moeda, function(){
+
+            moeda.setVisible(false); // Moeda fica "invisível"
+
+            var posicaoMoeda_Y = Phaser.Math.RND.between(50, 650); // Sorteia número
+
+            moeda.setPosition(posicaoMoeda_Y, 100); // Ajustar posição da moeda
+
+            pontuacao +=1; // Soma pontuação
+            placar.setText('Moedas:' + pontuacao); // Atualizar texto do placar
+
+            moeda.setVisible(true); // Ativa a visão da "nova moeda"
+            });
         }
 
         function update() {
@@ -122,8 +144,9 @@
         function semTurbo() {
             fogo.setVisible(false);
         }
-            
-        }
+    
+    }
+
     </script>
     
 </body>
