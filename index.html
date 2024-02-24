@@ -41,6 +41,7 @@
 
         //Criar variáveis do jogo
         var alien;
+        var teclado;
 
         // Carregar imagens
         function preload() {
@@ -54,10 +55,37 @@
 
             // Criar alienígena
             alien = this.physics.add.sprite(larguraJogo/2, 0, 'player');
-            alien.setCollideWorldBounds(true);
+
+            // Impedir que personagem atravesse barreira da imagem
+            alien.setCollideWorldBounds(true); 
+
+            // Acessar as setas do teclado 
+            teclado = this.input.keyboard.createCursorKeys();
         }
 
         function update() {
+
+            // Movimento para esquerda [ <- ]
+            if (teclado.left.isDown) {
+                alien.setVelocityX(-150); }
+
+            // Movimento para direita [ -> ]
+            else if (teclado.right.isDown) {
+                alien.setVelocityX(150); }
+
+            // Sem movimento horizontal [ x = 0 ]
+            else {
+                alien.setVelocityX(0);
+            }
+
+            // Movimento para cima [ ^ ]
+            if (teclado.up.isDown) {
+                alien.setVelocityY(-150);}
+
+            // Movimento para baixo [ gravidade em y]
+            else {
+                // Ação da gravidade do jogo em y
+            }
             
         }
     </script>
