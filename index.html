@@ -43,12 +43,14 @@
         var alien;
         var teclado;
         var fogo;
+        var plataforma;
 
         // Carregar imagens
         function preload() {
             this.load.image('background', 'assets/bg.png');
             this.load.image('player', 'assets/alienigena.png');
-            this.load.image('turbo_nave', 'assets/turbo.png')
+            this.load.image('turbo_nave', 'assets/turbo.png');
+            this.load.image('plataforma_tijolo', 'assets/tijolos.png');
         }
 
         function create() {
@@ -68,6 +70,10 @@
             // Acessar as setas do teclado 
             teclado = this.input.keyboard.createCursorKeys();
 
+            // Adicionar plataforma
+            plataforma = this.physics.add.staticImage(larguraJogo/2, alturaJogo/2, 'plataforma_tijolo');
+            // Adicionar colisão
+            this.physics.add.collider(alien, plataforma);
         }
 
         function update() {
