@@ -42,17 +42,23 @@
         //Criar variáveis do jogo
         var alien;
         var teclado;
+        var fogo;
 
         // Carregar imagens
         function preload() {
             this.load.image('background', 'assets/bg.png');
             this.load.image('player', 'assets/alienigena.png');
+            this.load.image('turbo_nave', 'assets/turbo.png')
         }
 
         function create() {
             // Adicionar plano de fundo do jogo
             this.add.image(larguraJogo/2, alturaJogo/2, 'background');
 
+            // Adicionar o "foguinho" do modo turbo
+            fogo = this.add.sprite(0, 0, 'turbo_nave');
+            fogo.setVisible(false);
+            
             // Criar alienígena
             alien = this.physics.add.sprite(larguraJogo/2, 0, 'player');
 
@@ -61,6 +67,7 @@
 
             // Acessar as setas do teclado 
             teclado = this.input.keyboard.createCursorKeys();
+
         }
 
         function update() {
@@ -80,12 +87,25 @@
 
             // Movimento para cima [ ^ ]
             if (teclado.up.isDown) {
-                alien.setVelocityY(-150);}
-
+                alien.setVelocityY(-150);
+                ativarTurbo();
+            }
+        
             // Movimento para baixo [ gravidade em y]
-            else {
+            else { semTurbo();
                 // Ação da gravidade do jogo em y
             }
+
+            // Atualizar posição do "foguinho" em relação ao alien
+            fogo.setPosition(alien.x, alien.y + alien.height/2);
+
+        function ativarTurbo() {
+            fogo.setVisible(true);
+        }
+
+        function semTurbo() {
+            fogo.setVisible(false);
+        }
             
         }
     </script>
