@@ -24,7 +24,8 @@
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 300 }
+                gravity: { y: 300 },
+                debug: true
             }
         },
 
@@ -53,6 +54,7 @@
 
             // Criar alienígena
             alien = this.physics.add.sprite(larguraJogo/2, 0, 'player');
+            alien.setCollideWorldBounds(true);
         }
 
         function update() {
