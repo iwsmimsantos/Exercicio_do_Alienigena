@@ -58,7 +58,7 @@
             // Adicionar o "foguinho" do modo turbo
             fogo = this.add.sprite(0, 0, 'turbo_nave');
             fogo.setVisible(false);
-            
+
             // Criar alienígena
             alien = this.physics.add.sprite(larguraJogo/2, 0, 'player');
 
@@ -99,10 +99,12 @@
             // Atualizar posição do "foguinho" em relação ao alien
             fogo.setPosition(alien.x, alien.y + alien.height/2);
 
+        // Função para ativar "foguinho"
         function ativarTurbo() {
             fogo.setVisible(true);
         }
 
+        // Função para desativar "foguinho"
         function semTurbo() {
             fogo.setVisible(false);
         }
